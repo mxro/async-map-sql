@@ -94,6 +94,26 @@ public class TestThatValuesCanBeWrittenAndRead {
 		
 	}
 	
+	@Test
+	public void test_persistence_in_medium() throws Exception {
+		map.putSync("2", 42);
+
+		AsyncJre.waitFor(new Deferred<Success>() {
+
+			@Override
+			public void get(ValueCallback<Success> callback) {
+				map.commit(Async.wrap(callback));
+			}
+		});
+		
+		Assert.assertEquals(42, map.getSync("2"));
+		
+		AsyncMap<String, Object> map2 = AsyncMapSql.createMap(AsyncMapSql.fromSqlConfiguration(sqlConf), deps);
+		
+		Assert.assertEquals(42, map2.getSync("2"));
+		
+	}
+	
 	@Before
 	public void setUp() throws Exception {
 

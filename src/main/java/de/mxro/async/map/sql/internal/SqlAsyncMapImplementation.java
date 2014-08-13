@@ -426,6 +426,7 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
 	private final SqlGetResources readFromSqlDatabase(final String uri)
 			throws SQLException {
+		
 		PreparedStatement getStatement = null;
 
 		getStatement = connection.prepareStatement(conf.sql().getGetTemplate());
