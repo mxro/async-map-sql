@@ -26,16 +26,12 @@
 
 
 		<dependency>
-			<groupId>de.mxro.service</groupId>
-			<artifactId>service-api</artifactId>
+			<groupId>de.mxro.async.map</groupId>
+			<artifactId>async-map</artifactId>
 			<version>[0.0.1,)</version>
 		</dependency>
 
-		<dependency>
-			<artifactId>concurrency-api</artifactId>
-			<groupId>de.mxro.concurrency</groupId>
-			<version>[0.0.1,)</version>
-		</dependency>
+		
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -158,6 +154,7 @@
 									<link>http://modules.appjangle.com/fn-api/latest/apidocs/</link>
 									<link>http://modules.appjangle.com/async-api/latest/apidocs/</link>
 									<link>http://modules.appjangle.com/service-api/latest/apidocs/</link>
+									<link>http://modules.appjangle.com/async-map/latest/apidocs/</link>
 								</links>
 							</configuration>
 						</plugin>
