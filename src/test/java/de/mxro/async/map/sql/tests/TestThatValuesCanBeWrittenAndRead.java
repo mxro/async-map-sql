@@ -78,9 +78,6 @@ public class TestThatValuesCanBeWrittenAndRead {
 	@Before
 	public void setUp() throws Exception {
 
-		
-		//Connection conn = DriverManager.getConnection("jdbc:h2:mem:test");
-
 		SqlConnectionConfiguration sqlConf = new SqlConnectionConfiguration() {
 
 			@Override

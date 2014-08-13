@@ -27,7 +27,7 @@ public class AsyncMapSql {
 	public static final void assertTable(SqlConnectionConfiguration sqlConf) {
 		Connection connection = SqlConnectionFactory.createConnection(sqlConf);
 		
-		
+		System.out.println("create table");
 		try {
 			CallableStatement statement = connection.prepareCall("CREATE TABLE IF NOT EXISTS TEST(ID VARCHAR(512) PRIMARY KEY, VALUE BLOB);");
 			
