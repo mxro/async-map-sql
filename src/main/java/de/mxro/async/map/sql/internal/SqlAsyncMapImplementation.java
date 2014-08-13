@@ -626,14 +626,7 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 	}
 
 	protected void initConnection() {
-		try {
-			connection = DriverManager.getConnection(conf.sql()
-					.getConnectionString());
-
-			connection.setAutoCommit(false);
-		} catch (final SQLException e) {
-			throw new RuntimeException(e);
-		}
+		connection = SqlConnectionFactory.createConnection(conf.sql());
 	}
 
 	
