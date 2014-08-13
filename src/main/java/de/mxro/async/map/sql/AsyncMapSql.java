@@ -9,4 +9,14 @@ public class AsyncMapSql {
 		return new SqlAsyncMapImplementation<V>(conf, deps);
 	}
 	
+	public static final SqlAsyncMapConfiguration fromSqlConfiguration(final SqlConnectionConfiguration sqlConf) {
+		return new SqlAsyncMapConfiguration() {
+			
+			@Override
+			public SqlConnectionConfiguration sql() {
+				return sqlConf;
+			}
+		};
+	}
+	
 }
