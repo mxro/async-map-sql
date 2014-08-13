@@ -51,6 +51,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>de.mxro.thrd.h2</groupId>
+			<artifactId>thrdH2</artifactId>
+			<version>[0.0.1,)</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
@@ -58,12 +65,7 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>de.mxro.thrd.h2</groupId>
-			<artifactId>thrdH2</artifactId>
-			<version>[0.0.1,)</version>
-			<scope>test</scope>
-		</dependency>
+
 	</dependencies>
 
 
