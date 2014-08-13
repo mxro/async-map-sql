@@ -567,10 +567,7 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 		});
 	}
 
-	@Override
-	public void commit(final WhenCommitted whenCommitted) {
-		
-	}
+	
 
 	protected void assertConnection() {
 		try {
@@ -593,18 +590,16 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 		}
 	}
 
-	@Override
-	public void clearCache() {
+	
 
-	}
-
-	public SqlAsyncMapImplementation(final SQLPersistenceConfiguration configuration) {
+	public SqlAsyncMapImplementation(final SqlAsyncMapConfiguration conf, SqlAsyncMapDependencies deps) {
 		super();
 
-		this.conf = configuration;
+		this.conf = conf;
+		this.deps = deps;
 
 		this.pendingInserts = Collections
-				.synchronizedMap(new HashMap<String, PersistedNode>(100));
+				.synchronizedMap(new HashMap<String, Object>(100));
 		this.pendingGets = Collections.synchronizedSet(new HashSet<String>());
 
 		this.writeWorker = new WriteWorker(OneUtilsJre.newJreConcurrency()
