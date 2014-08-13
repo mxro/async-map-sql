@@ -347,7 +347,7 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
 			try {
 
-				final PersistedNode performGet = performGet(uri);
+				final Object performGet = performGet(uri);
 
 				assert pendingGets.contains(uri);
 				pendingGets.remove(uri);
@@ -405,7 +405,7 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 			if (ENABLE_DEBUG) {
 				System.out.println("SqlConnection: Retrieved [" + node + "].");
 			}
-			return (PersistedNode) node;
+			return node;
 
 		} finally {
 			if (getResult != null) {
@@ -436,7 +436,6 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
 	}
 
-	@Override
 	public void deleteNode(final String uri) {
 
 		synchronized (pendingInserts) {
