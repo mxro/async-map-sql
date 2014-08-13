@@ -9,6 +9,13 @@ import de.mxro.async.map.sql.SqlConnectionConfiguration;
 public class SqlConnectionFactory {
 
 	public static Connection createConnection(SqlConnectionConfiguration conf) {
+		
+		try {
+			Class.forName(conf.getDriverClassName());
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+		
 		Connection connection;
 		try {
 			connection = DriverManager.getConnection(conf
