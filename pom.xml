@@ -30,6 +30,12 @@
 			<artifactId>async-map</artifactId>
 			<version>[0.0.1,)</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>de.mxro.factories</groupId>
+			<artifactId>factories</artifactId>
+			<version>[0.0.1,)</version>
+		</dependency>
 
 		<dependency>
 			<groupId>de.mxro.gtwutils</groupId>
@@ -159,6 +165,8 @@
 									<link>http://modules.appjangle.com/async-api/latest/apidocs/</link>
 									<link>http://modules.appjangle.com/service-api/latest/apidocs/</link>
 									<link>http://modules.appjangle.com/async-map/latest/apidocs/</link>
+									<link>http://modules.appjangle.com/factories/latest/apidocs/</link>
+									<link>http://modules.appjangle.com/serializer-api/latest/apidocs/</link>
 								</links>
 							</configuration>
 						</plugin>
