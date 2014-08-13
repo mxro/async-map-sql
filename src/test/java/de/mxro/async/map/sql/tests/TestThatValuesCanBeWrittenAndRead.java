@@ -22,9 +22,7 @@ import de.mxro.serialization.jre.StreamSource;
 public class TestThatValuesCanBeWrittenAndRead {
 
 	AsyncMap<String, Object> map;
-	
-	
-	
+
 	@Test
 	public void test_synchronous_operations() throws Exception {
 
