@@ -23,6 +23,10 @@ public class TestThatValuesCanBeWrittenAndRead {
 
 	AsyncMap<String, Object> map;
 
+	
+	SqlConnectionConfiguration sqlConf;
+	SqlAsyncMapDependencies deps;
+	
 	@Test
 	public void test_synchronous_operations() throws Exception {
 
@@ -93,7 +97,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 	@Before
 	public void setUp() throws Exception {
 
-		SqlConnectionConfiguration sqlConf = new SqlConnectionConfiguration() {
+		sqlConf = new SqlConnectionConfiguration() {
 
 			@Override
 			public String getDriverClassName() {
@@ -131,7 +135,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		
 		final Serializer<StreamSource, StreamDestination> serializer = SerializationJre
 				.newJavaSerializer();
-		SqlAsyncMapDependencies deps = new SqlAsyncMapDependencies() {
+		deps = new SqlAsyncMapDependencies() {
 
 			@Override
 			public Serializer<StreamSource, StreamDestination> getSerializer() {
