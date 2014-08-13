@@ -592,6 +592,16 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
 	
 
+	@Override
+	public void start(SimpleCallback callback) {
+		try  {
+			assertConnection();
+			callback.onSuccess();
+		} catch (Throwable t) {
+			callback.onFailure(t);
+		}
+	}
+
 	public SqlAsyncMapImplementation(final SqlAsyncMapConfiguration conf, SqlAsyncMapDependencies deps) {
 		super();
 
