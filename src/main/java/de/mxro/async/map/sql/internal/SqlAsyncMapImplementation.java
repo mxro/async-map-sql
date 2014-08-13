@@ -48,10 +48,6 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 	private final WriteWorker writeWorker;
 
 	private final static Object DELETE_NODE = Fn.object();
-
-	
-	
-	
 	
 
 	private class WriteWorker extends SingleInstanceQueueWorker<String> {
