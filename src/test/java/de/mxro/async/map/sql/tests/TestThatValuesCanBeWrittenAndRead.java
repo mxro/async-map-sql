@@ -38,7 +38,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		
 	}
 	
-	@Test
+	//@Test
 	public void test_asynchronous_operations() throws Exception {
 		
 
