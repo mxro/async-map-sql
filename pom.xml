@@ -327,9 +327,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git@github.com:mxro/async-map.git</connection>
-		<url>https://github.com/mxro/async-map</url>
-		<developerConnection>scm:git:git@github.com:mxro/async-map.git
+		<connection>scm:git:git@github.com:mxro/async-map-sql.git</connection>
+		<url>https://github.com/mxro/async-map-sql</url>
+		<developerConnection>scm:git:git@github.com:mxro/async-map-sql.git
 		</developerConnection>
 	</scm>
 
