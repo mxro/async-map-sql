@@ -27,9 +27,6 @@ public class TestThatValuesCanBeWrittenAndRead {
 	
 	@Test
 	public void test_synchronous_operations() throws Exception {
-		
-
-		
 
 		map.putSync("1", "Just a test Value");
 
@@ -50,6 +47,14 @@ public class TestThatValuesCanBeWrittenAndRead {
 			}
 		});
 
+		AsyncJre.waitFor(new Deferred<Success>() {
+
+			@Override
+			public void get(ValueCallback<Success> callback) {
+				map.commit(Async.wrap(callback));
+			}
+		});
+		
 		AsyncJre.waitFor(new Deferred<Success>() {
 
 			@Override
