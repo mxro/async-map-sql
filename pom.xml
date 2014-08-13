@@ -7,7 +7,6 @@
 	<version>0.0.2</version>
 	<description>Implementation using JDBC SQL interface for async-map framework.</description>
 	<url>https://github.com/mxro/async-map</url>
-
 	<properties>
 
 		<module.importedPackages>
