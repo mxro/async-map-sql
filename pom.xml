@@ -32,6 +32,13 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>de.mxro.serializer</groupId>
+			<artifactId>serializer-api</artifactId>
+			<version>[0.0.1,)</version>
+		</dependency>
+		
+		
+		<dependency>
 			<groupId>de.mxro.factories</groupId>
 			<artifactId>factories</artifactId>
 			<version>[0.0.1,)</version>
@@ -49,8 +56,6 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
-
-
 
 
 	</dependencies>
