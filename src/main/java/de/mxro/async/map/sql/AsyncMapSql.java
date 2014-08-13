@@ -8,6 +8,16 @@ import de.mxro.async.map.AsyncMap;
 import de.mxro.async.map.sql.internal.SqlAsyncMapImplementation;
 import de.mxro.async.map.sql.internal.SqlConnectionFactory;
 
+/**
+ * <p>
+ * Core methods to interact with async-map-sql module.
+ * <p>
+ * Use {@link #createMap(SqlAsyncMapConfiguration, SqlAsyncMapDependencies)} to
+ * create new SQL backed up AsyncMaps.
+ * 
+ * @author <a href="http://www.mxro.de">Max Rohde</a>
+ *
+ */
 public class AsyncMapSql {
 
 	public static final <V> AsyncMap<String, V> createMap(
