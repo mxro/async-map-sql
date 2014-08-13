@@ -35,6 +35,12 @@ public class AsyncMapSql {
 							+ sqlConf.getTableName()
 							+ "(ID VARCHAR(512) PRIMARY KEY, VALUE BLOB);");
 
+			statement.execute();
+
+			/*
+			 * Don't close the connection for H2 in memory databases. Closing
+			 * the connection would wipe the created table.
+			 */
 			if (!sqlConf.getConnectionString().contains(":mem:")) {
 				connection.close();
 			}
