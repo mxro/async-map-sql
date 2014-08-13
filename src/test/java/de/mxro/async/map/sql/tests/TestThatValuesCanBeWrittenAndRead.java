@@ -5,8 +5,15 @@ import java.sql.DriverManager;
 
 import org.junit.Test;
 
+import de.mxro.async.Async;
+import de.mxro.async.Deferred;
+import de.mxro.async.callbacks.ValueCallback;
+import de.mxro.async.jre.AsyncJre;
+import de.mxro.async.map.AsyncMap;
+import de.mxro.async.map.sql.AsyncMapSql;
 import de.mxro.async.map.sql.SqlAsyncMapDependencies;
 import de.mxro.async.map.sql.SqlConnectionConfiguration;
+import de.mxro.fn.Success;
 import de.mxro.serialization.Serializer;
 import de.mxro.serialization.jre.SerializationJre;
 import de.mxro.serialization.jre.StreamDestination;
@@ -55,7 +62,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		};
 		
 		final Serializer<StreamSource, StreamDestination> serializer = SerializationJre.newJavaSerializer();
-		new SqlAsyncMapDependencies() {
+		SqlAsyncMapDependencies deps = new SqlAsyncMapDependencies() {
 			
 			@Override
 			public Serializer<StreamSource, StreamDestination> getSerializer() {
@@ -63,6 +70,16 @@ public class TestThatValuesCanBeWrittenAndRead {
 				return serializer;
 			}
 		};
+		
+		final AsyncMap<String,Object> map = AsyncMapSql.createMap(AsyncMapSql.fromSqlConfiguration(sqlConf), deps);
+		
+		AsyncJre.waitFor(new Deferred<Success>() {
+
+			@Override
+			public void get(ValueCallback<Success> callback) {
+					map.start(Async.wrap(callback));
+			}
+		});
 		
 		conn.close();
 	}
