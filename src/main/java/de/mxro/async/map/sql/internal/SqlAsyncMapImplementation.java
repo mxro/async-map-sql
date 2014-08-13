@@ -596,10 +596,12 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 	public void start(SimpleCallback callback) {
 		try  {
 			assertConnection();
-			callback.onSuccess();
+			
 		} catch (Throwable t) {
 			callback.onFailure(t);
+			return;
 		}
+		callback.onSuccess();
 	}
 
 	public SqlAsyncMapImplementation(final SqlAsyncMapConfiguration conf, SqlAsyncMapDependencies deps) {
