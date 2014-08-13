@@ -19,4 +19,8 @@ public class AsyncMapSql {
 		};
 	}
 	
+	public static final void assertTable(SqlConnectionConfiguration sqlConf) {
+		
+	}
+	
 }
