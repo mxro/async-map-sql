@@ -1,8 +1,5 @@
 package de.mxro.async.map.sql.tests;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -29,8 +26,20 @@ public class TestThatValuesCanBeWrittenAndRead {
 	
 	
 	@Test
-	public void test() throws Exception {
-		//Class.forName("org.h2.Driver");
+	public void test_synchronous_operations() throws Exception {
+		
+
+		
+
+		map.putSync("1", "Just a test Value");
+
+		Assert.assertEquals("Just a test Value", map.getSync("1"));
+
+		
+	}
+	
+	@Test
+	public void test_synchronous_operations() throws Exception {
 		
 
 		AsyncJre.waitFor(new Deferred<Success>() {
@@ -103,6 +112,14 @@ public class TestThatValuesCanBeWrittenAndRead {
 
 		map = AsyncMapSql.createMap(
 				AsyncMapSql.fromSqlConfiguration(sqlConf), deps);
+		
+		AsyncJre.waitFor(new Deferred<Success>() {
+
+			@Override
+			public void get(ValueCallback<Success> callback) {
+				map.start(Async.wrap(callback));
+			}
+		});
 	}
 
 	@After
