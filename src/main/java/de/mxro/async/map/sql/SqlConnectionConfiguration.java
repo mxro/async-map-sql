@@ -1,5 +1,12 @@
 package de.mxro.async.map.sql;
 
+/**
+ * <P>
+ * Configuration to connect to interact with SQL database.
+ * 
+ * @author <a href="http://www.mxro.de">Max Rohde</a>
+ *
+ */
 public abstract class SqlConnectionConfiguration {
 
 	public abstract String getConnectionString();
