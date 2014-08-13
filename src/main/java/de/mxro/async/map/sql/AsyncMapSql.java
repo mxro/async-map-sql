@@ -32,8 +32,8 @@ public class AsyncMapSql {
 			CallableStatement statement = connection.prepareCall("CREATE TABLE IF NOT EXISTS "+sqlConf.getTableName()+"(ID VARCHAR(512) PRIMARY KEY, VALUE BLOB);");
 			
 			System.out.println(statement.execute());
-			
-			connection.close();
+
+			//connection.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
