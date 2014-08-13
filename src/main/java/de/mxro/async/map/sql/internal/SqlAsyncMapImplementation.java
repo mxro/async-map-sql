@@ -540,28 +540,11 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 		});
 	}
 
-	@Override
-	public void close(final WhenClosed whenClosed) {
-
-		this.commit(new WhenCommitted() {
-
-			@Override
-			public void thenDo() {
-
-				
-
-			}
-
-			@Override
-			public void onFailure(final Throwable t) {
-				whenClosed.onFailure(t);
-			}
-		});
-
-	}
+	
+	
 
 	@Override
-	public void commit(final WhenCommitted whenCommitted) {
+	public void commit(final SimpleCallback callback) {
 		commitThread.submit(new Runnable() {
 
 			@Override
@@ -571,17 +554,22 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
 					@Override
 					public void onSuccess() {
-						whenCommitted.thenDo();
+						callback.onSuccess();
 					}
 
 					@Override
 					public void onFailure(final Throwable message) {
-						whenCommitted.onFailure(message);
+						callback.onFailure(message);
 					}
 				});
 			}
 
 		});
+	}
+
+	@Override
+	public void commit(final WhenCommitted whenCommitted) {
+		
 	}
 
 	protected void assertConnection() {
