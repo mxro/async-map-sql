@@ -488,6 +488,58 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
 	}
 
+	
+	
+	@Override
+	public void stop(final SimpleCallback callback) {
+		this.commit(new SimpleCallback() {
+			
+			@Override
+			public void onFailure(Throwable t) {
+				callback.onFailure(t);
+			}
+			
+			@Override
+			public void onSuccess() {
+				writeWorker.getThread().getExecutor()
+				.shutdown(new WhenExecutorShutDown() {
+
+					@Override
+					public void thenDo() {
+						try {
+
+							if (connection != null
+									&& !connection.isClosed()) {
+								try {
+									connection.commit();
+									connection.close();
+								} catch (final Throwable t) {
+									callback
+											.onFailure(new Exception(
+													"Sql exception could not be closed.",
+													t));
+									return;
+								}
+							}
+
+						} catch (final Throwable t) {
+							callback.onFailure(t);
+							return;
+						}
+
+						callback.onSuccess();
+					}
+
+					@Override
+					public void onFailure(final Throwable t) {
+						callback.onFailure(t);
+					}
+				});
+				
+			}
+		});
+	}
+
 	@Override
 	public void close(final WhenClosed whenClosed) {
 
@@ -496,40 +548,7 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 			@Override
 			public void thenDo() {
 
-				writeWorker.getThread().getExecutor()
-						.shutdown(new WhenExecutorShutDown() {
-
-							@Override
-							public void thenDo() {
-								try {
-
-									if (connection != null
-											&& !connection.isClosed()) {
-										try {
-											connection.commit();
-											connection.close();
-										} catch (final Throwable t) {
-											whenClosed
-													.onFailure(new Exception(
-															"Sql exception could not be closed.",
-															t));
-											return;
-										}
-									}
-
-								} catch (final Throwable t) {
-									whenClosed.onFailure(t);
-									return;
-								}
-
-								whenClosed.thenDo();
-							}
-
-							@Override
-							public void onFailure(final Throwable t) {
-								whenClosed.onFailure(t);
-							}
-						});
+				
 
 			}
 
