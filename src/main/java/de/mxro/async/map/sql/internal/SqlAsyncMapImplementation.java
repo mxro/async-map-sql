@@ -22,7 +22,9 @@ import java.util.concurrent.Executors;
 import mx.gwtutils.concurrent.SingleInstanceQueueWorker;
 import one.utils.jre.OneUtilsJre;
 import de.mxro.async.callbacks.SimpleCallback;
+import de.mxro.async.callbacks.ValueCallback;
 import de.mxro.async.map.AsyncMap;
+import de.mxro.async.map.operations.MapOperation;
 import de.mxro.async.map.sql.SqlAsyncMapConfiguration;
 import de.mxro.async.map.sql.SqlAsyncMapDependencies;
 import de.mxro.concurrency.Executor;
@@ -448,6 +450,13 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
 	}
 
+	
+	
+	@Override
+	public void removeSync(String key) {
+		deleteNode(key);
+	}
+
 	public void deleteNode(final String uri) {
 
 		synchronized (pendingInserts) {
@@ -502,6 +511,33 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
 	
 	
+	
+	
+	@Override
+	public void put(String key, V value, SimpleCallback callback) {
+		putSync(key, value);
+		
+		this.commit(callback);
+	}
+
+	@Override
+	public void get(String key, ValueCallback<V> callback) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(String key, SimpleCallback callback) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void performOperation(MapOperation operation) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public void stop(final SimpleCallback callback) {
 		this.commit(new SimpleCallback() {
