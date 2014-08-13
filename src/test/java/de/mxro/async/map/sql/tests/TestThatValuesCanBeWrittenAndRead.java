@@ -5,7 +5,12 @@ import java.sql.DriverManager;
 
 import org.junit.Test;
 
+import de.mxro.async.map.sql.SqlAsyncMapDependencies;
 import de.mxro.async.map.sql.SqlConnectionConfiguration;
+import de.mxro.serialization.Serializer;
+import de.mxro.serialization.jre.SerializationJre;
+import de.mxro.serialization.jre.StreamDestination;
+import de.mxro.serialization.jre.StreamSource;
 
 public class TestThatValuesCanBeWrittenAndRead {
 
@@ -15,7 +20,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		Connection conn = DriverManager.
 		    getConnection("jdbc:h2:mem:test");
 		
-		new SqlConnectionConfiguration() {
+		SqlConnectionConfiguration sqlConf = new SqlConnectionConfiguration() {
 			
 			@Override
 			public String getDriverClassName() {
@@ -46,6 +51,16 @@ public class TestThatValuesCanBeWrittenAndRead {
 			@Override
 			public String getTableName() {
 				return "test";
+			}
+		};
+		
+		final Serializer<StreamSource, StreamDestination> serializer = SerializationJre.newJavaSerializer();
+		new SqlAsyncMapDependencies() {
+			
+			@Override
+			public Serializer<StreamSource, StreamDestination> getSerializer() {
+				
+				return serializer;
 			}
 		};
 		
