@@ -24,7 +24,9 @@ public class TestThatValuesCanBeWrittenAndRead {
 
 	@Test
 	public void test() throws Exception {
-		Class.forName("org.h2.Driver");
+		//Class.forName("org.h2.Driver");
+		
+		
 		Connection conn = DriverManager.getConnection("jdbc:h2:mem:test");
 
 		SqlConnectionConfiguration sqlConf = new SqlConnectionConfiguration() {
@@ -61,6 +63,8 @@ public class TestThatValuesCanBeWrittenAndRead {
 			}
 		};
 
+		AsyncMapSql.assertTable(sqlConf);
+		
 		final Serializer<StreamSource, StreamDestination> serializer = SerializationJre
 				.newJavaSerializer();
 		SqlAsyncMapDependencies deps = new SqlAsyncMapDependencies() {
