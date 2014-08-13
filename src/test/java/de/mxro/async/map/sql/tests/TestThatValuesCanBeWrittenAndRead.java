@@ -31,6 +31,18 @@ public class TestThatValuesCanBeWrittenAndRead {
 		map.putSync("1", "Just a test Value");
 
 		Assert.assertEquals("Just a test Value", map.getSync("1"));
+		
+		map.putSync("2", 42);
+
+		AsyncJre.waitFor(new Deferred<Success>() {
+
+			@Override
+			public void get(ValueCallback<Success> callback) {
+				map.commit(Async.wrap(callback));
+			}
+		});
+		
+		Assert.assertEquals(42, map.getSync("2"));
 
 		
 	}
