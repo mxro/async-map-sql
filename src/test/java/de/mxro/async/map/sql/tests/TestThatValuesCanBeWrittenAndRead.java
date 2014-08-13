@@ -50,9 +50,27 @@ public class TestThatValuesCanBeWrittenAndRead {
 			}
 		});
 
-		
+		AsyncJre.waitFor(new Deferred<Success>() {
 
-		Assert.assertEquals("Just a test Value", map.getSync("1"));
+			@Override
+			public void get(final ValueCallback<Success> callback) {
+				map.get("1", new ValueCallback<Object>() {
+
+					@Override
+					public void onFailure(Throwable t) {
+						callback.onFailure(t);
+					}
+
+					@Override
+					public void onSuccess(Object value) {
+						Assert.assertEquals("Just a test Value", value);
+						callback.onSuccess(Success.INSTANCE);
+					}
+				});
+			}
+		});
+
+		
 
 		
 	}
