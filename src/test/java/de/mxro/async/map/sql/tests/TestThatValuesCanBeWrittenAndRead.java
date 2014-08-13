@@ -37,6 +37,16 @@ public class TestThatValuesCanBeWrittenAndRead {
 				return "MERGE INTO " + getTableName()
 						+ " (Id, Value) KEY (Id) VALUES (?, ?)";
 			}
+
+			@Override
+			public String getConnectionString() {
+				return "jdbc:h2:mem:test";
+			}
+
+			@Override
+			public String getTableName() {
+				return "test";
+			}
 		};
 		
 		conn.close();
