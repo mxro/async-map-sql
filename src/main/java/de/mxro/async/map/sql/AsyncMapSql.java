@@ -29,7 +29,7 @@ public class AsyncMapSql {
 		
 		
 		try {
-			CallableStatement statement = connection.prepareCall("CREATE TABLE IF NOT EXISTS TEST(ID VARCHAR(255) PRIMARY KEY, VALUE VARCHAR(255));");
+			CallableStatement statement = connection.prepareCall("CREATE TABLE IF NOT EXISTS TEST(ID VARCHAR(512) PRIMARY KEY, VALUE BLOB);");
 			
 			statement.execute();
 			
