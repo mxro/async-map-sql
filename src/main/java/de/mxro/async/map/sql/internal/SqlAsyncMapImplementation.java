@@ -523,31 +523,21 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 	@Override
 	public void get(final String key, final ValueCallback<V> callback) {
 		final V value = getSync(key);
+		callback.onSuccess(value);
 		
-		this.commit(new SimpleCallback() {
-			
-			@Override
-			public void onFailure(Throwable t) {
-				callback.onFailure(t);
-			}
-			
-			@Override
-			public void onSuccess() {
-				callback.onSuccess(value);
-			}
-		});
 	}
 
 	@Override
 	public void remove(String key, SimpleCallback callback) {
-		// TODO Auto-generated method stub
+		removeSync(key);
+		
+		this.commit(callback);
 		
 	}
 
 	@Override
 	public void performOperation(MapOperation operation) {
-		// TODO Auto-generated method stub
-		
+		// nothing
 	}
 
 	@Override
