@@ -3,6 +3,7 @@ package de.mxro.async.map.sql.tests;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import de.mxro.async.Async;
@@ -24,11 +25,10 @@ public class TestThatValuesCanBeWrittenAndRead {
 	@Test
 	public void test() throws Exception {
 		Class.forName("org.h2.Driver");
-		Connection conn = DriverManager.
-		    getConnection("jdbc:h2:mem:test");
-		
+		Connection conn = DriverManager.getConnection("jdbc:h2:mem:test");
+
 		SqlConnectionConfiguration sqlConf = new SqlConnectionConfiguration() {
-			
+
 			@Override
 			public String getDriverClassName() {
 				return "org.h2.Driver";
@@ -60,27 +60,41 @@ public class TestThatValuesCanBeWrittenAndRead {
 				return "test";
 			}
 		};
-		
-		final Serializer<StreamSource, StreamDestination> serializer = SerializationJre.newJavaSerializer();
+
+		final Serializer<StreamSource, StreamDestination> serializer = SerializationJre
+				.newJavaSerializer();
 		SqlAsyncMapDependencies deps = new SqlAsyncMapDependencies() {
-			
+
 			@Override
 			public Serializer<StreamSource, StreamDestination> getSerializer() {
-				
+
 				return serializer;
 			}
 		};
-		
-		final AsyncMap<String,Object> map = AsyncMapSql.createMap(AsyncMapSql.fromSqlConfiguration(sqlConf), deps);
-		
+
+		final AsyncMap<String, Object> map = AsyncMapSql.createMap(
+				AsyncMapSql.fromSqlConfiguration(sqlConf), deps);
+
 		AsyncJre.waitFor(new Deferred<Success>() {
 
 			@Override
 			public void get(ValueCallback<Success> callback) {
-					map.start(Async.wrap(callback));
+				map.start(Async.wrap(callback));
 			}
 		});
-		
+
+		map.putSync("1", "Just a test Value");
+
+		Assert.assertEquals("Just a test Value", map.getSync("1"));
+
+		AsyncJre.waitFor(new Deferred<Success>() {
+
+			@Override
+			public void get(ValueCallback<Success> callback) {
+				map.stop(Async.wrap(callback));
+			}
+		});
+
 		conn.close();
 	}
 
