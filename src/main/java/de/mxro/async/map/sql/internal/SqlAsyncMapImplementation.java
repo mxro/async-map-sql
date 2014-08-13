@@ -33,7 +33,7 @@ import de.mxro.concurrency.Executor.WhenExecutorShutDown;
 import de.mxro.fn.Fn;
 import de.mxro.serialization.jre.SerializationJre;
 
-public class SqlAsyncMap<V> implements AsyncMap<String, V> {
+public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
 	private final static boolean ENABLE_DEBUG = false;
 
@@ -596,7 +596,7 @@ public class SqlAsyncMap<V> implements AsyncMap<String, V> {
 
 	}
 
-	public SqlAsyncMap(final SQLPersistenceConfiguration configuration) {
+	public SqlAsyncMapImplementation(final SQLPersistenceConfiguration configuration) {
 		super();
 
 		this.conf = configuration;
