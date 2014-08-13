@@ -47,6 +47,11 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
 	private final static Object DELETE_NODE = Fn.object();
 
+	
+	
+	
+	
+
 	private class WriteWorker extends SingleInstanceQueueWorker<String> {
 
 		@Override
@@ -317,6 +322,13 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public V getSync(String key) {
+		
+		return (V) getNode(key);
+	}
+	
 	public Object getNode(final String uri) {
 
 		synchronized (pendingInserts) {
