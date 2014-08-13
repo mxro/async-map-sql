@@ -9,7 +9,7 @@
 	<url>https://github.com/mxro/async-map</url>
 
 	<properties>
-		
+
 		<module.importedPackages>
 			org.junit,
 			*
@@ -31,7 +31,11 @@
 			<version>[0.0.1,)</version>
 		</dependency>
 
-		
+		<dependency>
+			<groupId>de.mxro.gtwutils</groupId>
+			<artifactId>mxGWTUtils</artifactId>
+			<version>[0.0.1,)</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -40,7 +44,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		
+
 
 
 	</dependencies>
@@ -87,7 +91,7 @@
 
 
 
-			
+
 
 
 			<!-- Keep the MANIFEST.MF used by eclipse in sync with the MANIFEST.MF 
