@@ -11,7 +11,10 @@ public class TestThatValuesCanBeWrittenAndRead {
 	public void test() throws Exception {
 		Class.forName("org.h2.Driver");
 		Connection conn = DriverManager.
-		    getConnection("jdbc:h2:~/test");
+		    getConnection("jdbc:h2:mem:test");
+		
+		
+		
 		conn.close();
 	}
 
