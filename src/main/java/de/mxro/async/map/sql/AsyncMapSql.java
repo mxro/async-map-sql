@@ -19,7 +19,7 @@ import de.mxro.async.map.sql.internal.SqlConnectionFactory;
  *
  */
 public class AsyncMapSql {
-
+	
 	/**
 	 * Creates a new AsyncMap persisted by a JDBC compatible SQL database.
 	 * 
