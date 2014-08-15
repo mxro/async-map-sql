@@ -1,6 +1,8 @@
 async-map-sql
 =============
 
+[![Build Status](https://travis-ci.org/mxro/async-map-sql.svg?branch=master)](https://travis-ci.org/mxro/async-map-sql)
+
 A SQL implementation for the async-map interface.
 
 - [Dependencies](http://modules.appjangle.com/async-map-sql/latest/dependencies.html)
