@@ -26,8 +26,8 @@ import de.mxro.async.map.AsyncMap;
 import de.mxro.async.map.operations.MapOperation;
 import de.mxro.async.map.sql.SqlAsyncMapConfiguration;
 import de.mxro.async.map.sql.SqlAsyncMapDependencies;
-import de.mxro.concurrency.Executor;
-import de.mxro.concurrency.Executor.WhenExecutorShutDown;
+import de.mxro.concurrency.wrappers.SimpleExecutor;
+import de.mxro.concurrency.wrappers.SimpleExecutor.WhenExecutorShutDown;
 import de.mxro.fn.Fn;
 import de.mxro.serialization.jre.SerializationJre;
 
@@ -287,7 +287,7 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 			}
 		}
 
-		public WriteWorker(final Executor executor, final Queue<String> queue) {
+		public WriteWorker(final SimpleExecutor executor, final Queue<String> queue) {
 			super(executor, queue, OneUtilsJre.newJreConcurrency());
 		}
 
