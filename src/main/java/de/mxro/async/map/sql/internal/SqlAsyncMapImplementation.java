@@ -18,7 +18,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import mx.gwtutils.concurrent.SingleInstanceQueueWorker;
 import one.utils.jre.OneUtilsJre;
 import de.mxro.async.callbacks.SimpleCallback;
 import de.mxro.async.callbacks.ValueCallback;
@@ -26,6 +25,7 @@ import de.mxro.async.map.AsyncMap;
 import de.mxro.async.map.operations.MapOperation;
 import de.mxro.async.map.sql.SqlAsyncMapConfiguration;
 import de.mxro.async.map.sql.SqlAsyncMapDependencies;
+import de.mxro.concurrency.schedule.SingleInstanceQueueWorker;
 import de.mxro.concurrency.wrappers.SimpleExecutor;
 import de.mxro.concurrency.wrappers.SimpleExecutor.WhenExecutorShutDown;
 import de.mxro.fn.Fn;
