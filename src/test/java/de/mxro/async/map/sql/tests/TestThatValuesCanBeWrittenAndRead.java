@@ -6,13 +6,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.mxro.async.Async;
-import de.mxro.async.Deferred;
 import de.mxro.async.callbacks.ValueCallback;
 import de.mxro.async.jre.AsyncJre;
 import de.mxro.async.map.AsyncMap;
 import de.mxro.async.map.sql.AsyncMapSql;
 import de.mxro.async.map.sql.SqlAsyncMapDependencies;
 import de.mxro.async.map.sql.SqlConnectionConfiguration;
+import de.mxro.async.promise.Deferred;
 import de.mxro.fn.Success;
 import de.mxro.serialization.Serializer;
 import de.mxro.serialization.jre.SerializationJre;
