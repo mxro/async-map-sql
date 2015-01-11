@@ -39,7 +39,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		AsyncJre.waitFor(new Deferred<Success>() {
 
 			@Override
-			public void get(ValueCallback<Success> callback) {
+			public void apply(ValueCallback<Success> callback) {
 				map.commit(Async.wrap(callback));
 			}
 		});
@@ -56,7 +56,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		AsyncJre.waitFor(new Deferred<Success>() {
 
 			@Override
-			public void get(ValueCallback<Success> callback) {
+			public void apply(ValueCallback<Success> callback) {
 				map.put("1", "Just a test Value", Async.wrap(callback));
 			}
 		});
@@ -64,7 +64,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		AsyncJre.waitFor(new Deferred<Success>() {
 
 			@Override
-			public void get(ValueCallback<Success> callback) {
+			public void apply(ValueCallback<Success> callback) {
 				map.commit(Async.wrap(callback));
 			}
 		});
@@ -72,7 +72,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		AsyncJre.waitFor(new Deferred<Success>() {
 
 			@Override
-			public void get(final ValueCallback<Success> callback) {
+			public void apply(final ValueCallback<Success> callback) {
 				map.get("1", new ValueCallback<Object>() {
 
 					@Override
@@ -101,7 +101,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		AsyncJre.waitFor(new Deferred<Success>() {
 
 			@Override
-			public void get(ValueCallback<Success> callback) {
+			public void apply(ValueCallback<Success> callback) {
 				map.commit(Async.wrap(callback));
 			}
 		});
@@ -170,7 +170,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		AsyncJre.waitFor(new Deferred<Success>() {
 
 			@Override
-			public void get(ValueCallback<Success> callback) {
+			public void apply(ValueCallback<Success> callback) {
 				map.start(Async.wrap(callback));
 			}
 		});
@@ -181,7 +181,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		AsyncJre.waitFor(new Deferred<Success>() {
 
 			@Override
-			public void get(ValueCallback<Success> callback) {
+			public void apply(ValueCallback<Success> callback) {
 				map.stop(Async.wrap(callback));
 			}
 		});
