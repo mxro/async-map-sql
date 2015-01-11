@@ -8,7 +8,7 @@ import org.junit.Test;
 import de.mxro.async.AsyncCommon;
 import de.mxro.async.Operation;
 import de.mxro.async.callbacks.ValueCallback;
-import de.mxro.async.jre.AsyncJre;
+import de.mxro.async.jre.Async;
 import de.mxro.async.map.AsyncMap;
 import de.mxro.async.map.sql.AsyncMapSql;
 import de.mxro.async.map.sql.SqlAsyncMapDependencies;
@@ -36,7 +36,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		
 		map.putSync("2", 42);
 
-		AsyncJre.waitFor(new Operation<Success>() {
+		Async.waitFor(new Operation<Success>() {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
@@ -53,7 +53,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 	public void test_asynchronous_operations() throws Exception {
 		
 
-		AsyncJre.waitFor(new Operation<Success>() {
+		Async.waitFor(new Operation<Success>() {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
@@ -61,7 +61,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 			}
 		});
 
-		AsyncJre.waitFor(new Operation<Success>() {
+		Async.waitFor(new Operation<Success>() {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
@@ -69,7 +69,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 			}
 		});
 		
-		AsyncJre.waitFor(new Operation<Success>() {
+		Async.waitFor(new Operation<Success>() {
 
 			@Override
 			public void apply(final ValueCallback<Success> callback) {
@@ -98,7 +98,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 	public void test_persistence_in_medium() throws Exception {
 		map.putSync("2", 42);
 
-		AsyncJre.waitFor(new Operation<Success>() {
+		Async.waitFor(new Operation<Success>() {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
@@ -167,7 +167,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 		map = AsyncMapSql.createMap(
 				AsyncMapSql.fromSqlConfiguration(sqlConf), deps);
 		
-		AsyncJre.waitFor(new Operation<Success>() {
+		Async.waitFor(new Operation<Success>() {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
@@ -178,7 +178,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 
 	@After
 	public void tearDown() throws Exception {
-		AsyncJre.waitFor(new Operation<Success>() {
+		Async.waitFor(new Operation<Success>() {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
