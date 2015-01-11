@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.mxro.async.Async;
+import de.mxro.async.AsyncCommon;
 import de.mxro.async.Operation;
 import de.mxro.async.callbacks.ValueCallback;
 import de.mxro.async.jre.AsyncJre;
@@ -40,7 +40,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
-				map.commit(Async.wrap(callback));
+				map.commit(AsyncCommon.wrap(callback));
 			}
 		});
 		
@@ -57,7 +57,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
-				map.put("1", "Just a test Value", Async.wrap(callback));
+				map.put("1", "Just a test Value", AsyncCommon.wrap(callback));
 			}
 		});
 
@@ -65,7 +65,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
-				map.commit(Async.wrap(callback));
+				map.commit(AsyncCommon.wrap(callback));
 			}
 		});
 		
@@ -102,7 +102,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
-				map.commit(Async.wrap(callback));
+				map.commit(AsyncCommon.wrap(callback));
 			}
 		});
 		
@@ -171,7 +171,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
-				map.start(Async.wrap(callback));
+				map.start(AsyncCommon.wrap(callback));
 			}
 		});
 	}
@@ -182,7 +182,7 @@ public class TestThatValuesCanBeWrittenAndRead {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
-				map.stop(Async.wrap(callback));
+				map.stop(AsyncCommon.wrap(callback));
 			}
 		});
 
