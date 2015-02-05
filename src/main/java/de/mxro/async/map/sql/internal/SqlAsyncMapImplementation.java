@@ -33,7 +33,7 @@ import de.mxro.serialization.jre.SerializationJre;
 
 public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
-    private final static boolean ENABLE_DEBUG = true;
+    private final static boolean ENABLE_DEBUG = false;
 
     private final SqlAsyncMapConfiguration conf;
 
@@ -56,7 +56,7 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
             synchronized (pendingInserts) {
 
                 if (ENABLE_DEBUG) {
-                    System.out.println("SqlConnection: Inserting [" + items.size() + "] elements.");
+                    System.out.println(this + ": Inserting [" + items.size() + "] elements.");
                 }
 
                 for (final String item : items) {
@@ -66,7 +66,7 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
                     if (!pendingInserts.containsKey(uri)) {
                         if (ENABLE_DEBUG) {
-                            System.out.println("SqlConnection: Insert has been performed by previous operation [" + uri
+                            System.out.println(this + ": Insert has been performed by previous operation [" + uri
                                     + "].");
                         }
                         continue;
