@@ -21,171 +21,185 @@ import de.mxro.serialization.jre.StreamSource;
 
 public class TestThatValuesCanBeWrittenAndRead {
 
-	AsyncMap<String, Object> map;
+    AsyncMap<String, Object> map;
 
-	
-	SqlConnectionConfiguration sqlConf;
-	SqlAsyncMapDependencies deps;
-	
-	@Test
-	public void test_synchronous_operations() throws Exception {
+    SqlConnectionConfiguration sqlConf;
+    SqlAsyncMapDependencies deps;
 
-		map.putSync("1", "Just a test Value");
+    @Test
+    public void test_synchronous_operations() throws Exception {
 
-		Assert.assertEquals("Just a test Value", map.getSync("1"));
-		
-		map.putSync("2", 42);
+        map.putSync("1", "Just a test Value");
 
-		Async.waitFor(new Operation<Success>() {
+        Assert.assertEquals("Just a test Value", map.getSync("1"));
 
-			@Override
-			public void apply(ValueCallback<Success> callback) {
-				map.commit(AsyncCommon.wrap(callback));
-			}
-		});
-		
-		Assert.assertEquals(42, map.getSync("2"));
+        map.putSync("2", 42);
 
-		
-	}
-	
-	@Test
-	public void test_asynchronous_operations() throws Exception {
-		
+        Async.waitFor(new Operation<Success>() {
 
-		Async.waitFor(new Operation<Success>() {
+            @Override
+            public void apply(final ValueCallback<Success> callback) {
+                map.commit(AsyncCommon.wrap(callback));
+            }
+        });
 
-			@Override
-			public void apply(ValueCallback<Success> callback) {
-				map.put("1", "Just a test Value", AsyncCommon.wrap(callback));
-			}
-		});
+        Assert.assertEquals(42, map.getSync("2"));
 
-		Async.waitFor(new Operation<Success>() {
+    }
 
-			@Override
-			public void apply(ValueCallback<Success> callback) {
-				map.commit(AsyncCommon.wrap(callback));
-			}
-		});
-		
-		Async.waitFor(new Operation<Success>() {
+    @Test
+    public void test_asynchronous_operations() throws Exception {
 
-			@Override
-			public void apply(final ValueCallback<Success> callback) {
-				map.get("1", new ValueCallback<Object>() {
+        Async.waitFor(new Operation<Success>() {
 
-					@Override
-					public void onFailure(Throwable t) {
-						callback.onFailure(t);
-					}
+            @Override
+            public void apply(final ValueCallback<Success> callback) {
+                map.put("1", "Just a test Value", AsyncCommon.wrap(callback));
+            }
+        });
 
-					@Override
-					public void onSuccess(Object value) {
-						Assert.assertEquals("Just a test Value", value);
-						callback.onSuccess(Success.INSTANCE);
-					}
-				});
-			}
-		});
+        Async.waitFor(new Operation<Success>() {
 
-		
+            @Override
+            public void apply(final ValueCallback<Success> callback) {
+                map.commit(AsyncCommon.wrap(callback));
+            }
+        });
 
-		
-	}
-	
-	@Test
-	public void test_persistence_in_medium() throws Exception {
-		map.putSync("2", 42);
+        Async.waitFor(new Operation<Success>() {
 
-		Async.waitFor(new Operation<Success>() {
+            @Override
+            public void apply(final ValueCallback<Success> callback) {
+                map.get("1", new ValueCallback<Object>() {
 
-			@Override
-			public void apply(ValueCallback<Success> callback) {
-				map.commit(AsyncCommon.wrap(callback));
-			}
-		});
-		
-		Assert.assertEquals(42, map.getSync("2"));
-		
-		AsyncMap<String, Object> map2 = AsyncMapSql.createMap(AsyncMapSql.fromSqlConfiguration(sqlConf), deps);
-		
-		Assert.assertEquals(42, map2.getSync("2"));
-		
-	}
-	
-	@Before
-	public void setUp() throws Exception {
+                    @Override
+                    public void onFailure(final Throwable t) {
+                        callback.onFailure(t);
+                    }
 
-		sqlConf = new SqlConnectionConfiguration() {
+                    @Override
+                    public void onSuccess(final Object value) {
+                        Assert.assertEquals("Just a test Value", value);
+                        callback.onSuccess(Success.INSTANCE);
+                    }
+                });
+            }
+        });
 
-			@Override
-			public String getDriverClassName() {
-				return "org.h2.Driver";
-			}
+    }
 
-			@Override
-			public boolean supportsInsertOrUpdate() {
-				return false;
-			}
+    @Test
+    public void test_persistence_in_medium() throws Exception {
+        map.putSync("2", 42);
 
-			@Override
-			public boolean supportsMerge() {
-				return true;
-			}
+        Async.waitFor(new Operation<Success>() {
 
-			@Override
-			public String getMergeTemplate() {
-				return "MERGE INTO " + getTableName()
-						+ " (Id, Value) KEY (Id) VALUES (?, ?)";
-			}
+            @Override
+            public void apply(final ValueCallback<Success> callback) {
+                map.commit(AsyncCommon.wrap(callback));
+            }
+        });
 
-			@Override
-			public String getConnectionString() {
-				return "jdbc:h2:mem:test";
-			}
+        Assert.assertEquals(42, map.getSync("2"));
 
-			@Override
-			public String getTableName() {
-				return "test";
-			}
-		};
+        final AsyncMap<String, Object> map2 = AsyncMapSql.createMap(AsyncMapSql.fromSqlConfiguration(sqlConf), deps);
 
-		AsyncMapSql.assertTable(sqlConf);
-		
-		final Serializer<StreamSource, StreamDestination> serializer = SerializationJre
-				.newJavaSerializer();
-		deps = new SqlAsyncMapDependencies() {
+        Assert.assertEquals(42, map2.getSync("2"));
 
-			@Override
-			public Serializer<StreamSource, StreamDestination> getSerializer() {
+    }
 
-				return serializer;
-			}
-		};
+    @Test
+    public void test_difference_in_case() throws Exception {
+        map.putSync("Read_it", 42);
+        map.putSync("Read_It", 43);
 
-		map = AsyncMapSql.createMap(
-				AsyncMapSql.fromSqlConfiguration(sqlConf), deps);
-		
-		Async.waitFor(new Operation<Success>() {
+        Async.waitFor(new Operation<Success>() {
 
-			@Override
-			public void apply(ValueCallback<Success> callback) {
-				map.start(AsyncCommon.wrap(callback));
-			}
-		});
-	}
+            @Override
+            public void apply(final ValueCallback<Success> callback) {
+                map.commit(AsyncCommon.wrap(callback));
+            }
+        });
 
-	@After
-	public void tearDown() throws Exception {
-		Async.waitFor(new Operation<Success>() {
+        Assert.assertEquals(42, map.getSync("Read_it"));
 
-			@Override
-			public void apply(ValueCallback<Success> callback) {
-				map.stop(AsyncCommon.wrap(callback));
-			}
-		});
+        // AsyncMap<String, Object> map2 =
+        // AsyncMapSql.createMap(AsyncMapSql.fromSqlConfiguration(sqlConf),
+        // deps);
 
-	}
+        // Assert.assertEquals(42, map2.getSync("2"));
+
+    }
+
+    @Before
+    public void setUp() throws Exception {
+
+        sqlConf = new SqlConnectionConfiguration() {
+
+            @Override
+            public String getDriverClassName() {
+                return "org.h2.Driver";
+            }
+
+            @Override
+            public boolean supportsInsertOrUpdate() {
+                return false;
+            }
+
+            @Override
+            public boolean supportsMerge() {
+                return true;
+            }
+
+            @Override
+            public String getMergeTemplate() {
+                return "MERGE INTO " + getTableName() + " (Id, Value) KEY (Id) VALUES (?, ?)";
+            }
+
+            @Override
+            public String getConnectionString() {
+                return "jdbc:h2:mem:test";
+            }
+
+            @Override
+            public String getTableName() {
+                return "test";
+            }
+        };
+
+        AsyncMapSql.assertTable(sqlConf);
+
+        final Serializer<StreamSource, StreamDestination> serializer = SerializationJre.newJavaSerializer();
+        deps = new SqlAsyncMapDependencies() {
+
+            @Override
+            public Serializer<StreamSource, StreamDestination> getSerializer() {
+
+                return serializer;
+            }
+        };
+
+        map = AsyncMapSql.createMap(AsyncMapSql.fromSqlConfiguration(sqlConf), deps);
+
+        Async.waitFor(new Operation<Success>() {
+
+            @Override
+            public void apply(final ValueCallback<Success> callback) {
+                map.start(AsyncCommon.wrap(callback));
+            }
+        });
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Async.waitFor(new Operation<Success>() {
+
+            @Override
+            public void apply(final ValueCallback<Success> callback) {
+                map.stop(AsyncCommon.wrap(callback));
+            }
+        });
+
+    }
 
 }
