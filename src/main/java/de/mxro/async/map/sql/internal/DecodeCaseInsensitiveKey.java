@@ -2,7 +2,7 @@ package de.mxro.async.map.sql.internal;
 
 import de.mxro.fn.Function;
 
-public class CaseInsensitiveToCaseSensitiveFilter implements Function<String, String> {
+public class DecodeCaseInsensitiveKey implements Function<String, String> {
 
     @Override
     public String apply(final String input) {

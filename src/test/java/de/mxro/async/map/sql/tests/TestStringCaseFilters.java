@@ -4,17 +4,17 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import de.mxro.async.map.sql.internal.CaseInsensitiveToCaseSensitiveFilter;
-import de.mxro.async.map.sql.internal.MakeKeyCaseInsensitive;
+import de.mxro.async.map.sql.internal.DecodeCaseInsensitiveKey;
+import de.mxro.async.map.sql.internal.EncodeCaseInsensitiveKey;
 
 public class TestStringCaseFilters {
 
     @Test
     public void test() {
 
-        final MakeKeyCaseInsensitive filterIn = new MakeKeyCaseInsensitive();
+        final EncodeCaseInsensitiveKey filterIn = new EncodeCaseInsensitiveKey();
 
-        final CaseInsensitiveToCaseSensitiveFilter filterOut = new CaseInsensitiveToCaseSensitiveFilter();
+        final DecodeCaseInsensitiveKey filterOut = new DecodeCaseInsensitiveKey();
 
         final String lowerCase = filterIn.apply("Something_with_Uppercase");
 
