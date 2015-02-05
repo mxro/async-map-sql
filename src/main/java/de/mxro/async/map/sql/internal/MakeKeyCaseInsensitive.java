@@ -2,7 +2,7 @@ package de.mxro.async.map.sql.internal;
 
 import de.mxro.fn.Function;
 
-public class CaseSensitiveToCaseInsensitiveFilter implements Function<String, String> {
+public class MakeKeyCaseInsensitive implements Function<String, String> {
 
     @Override
     public String apply(final String input) {
@@ -15,7 +15,7 @@ public class CaseSensitiveToCaseInsensitiveFilter implements Function<String, St
             if (Character.isLowerCase(testChar) || testChar == '_') {
                 res += testChar;
             } else {
-                res += "^" + Character.toLowerCase(testChar);
+                res += "^" + testChar;
             }
 
         }
