@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import de.mxro.async.map.AsyncMap;
+import de.mxro.async.map.AsyncMaps;
+import de.mxro.async.map.sql.internal.EncodeCaseInsensitiveKey;
 import de.mxro.async.map.sql.internal.SqlAsyncMapImplementation;
 import de.mxro.async.map.sql.internal.SqlConnectionFactory;
 
@@ -18,55 +20,56 @@ import de.mxro.async.map.sql.internal.SqlConnectionFactory;
  * @author <a href="http://www.mxro.de">Max Rohde</a>
  *
  */
-public class AsyncMapSql {
-	
-	/**
-	 * Creates a new AsyncMap persisted by a JDBC compatible SQL database.
-	 * 
-	 * @param conf
-	 *            Configuration for this map.
-	 * @param deps
-	 *            Run-time dependencies for the maps.
-	 * @return
-	 */
-	public static final <V> AsyncMap<String, V> createMap(
-			SqlAsyncMapConfiguration conf, SqlAsyncMapDependencies deps) {
-		return new SqlAsyncMapImplementation<V>(conf, deps);
-	}
+public final class AsyncMapSql {
 
-	public static final SqlAsyncMapConfiguration fromSqlConfiguration(
-			final SqlConnectionConfiguration sqlConf) {
-		return new SqlAsyncMapConfiguration() {
+    /**
+     * Creates a new AsyncMap persisted by a JDBC compatible SQL database.
+     * 
+     * @param conf
+     *            Configuration for this map.
+     * @param deps
+     *            Run-time dependencies for the maps.
+     * @return
+     */
+    public static final <V> AsyncMap<String, V> createMap(final SqlAsyncMapConfiguration conf,
+            final SqlAsyncMapDependencies deps) {
+        return new SqlAsyncMapImplementation<V>(conf, deps);
+    }
 
-			@Override
-			public SqlConnectionConfiguration sql() {
-				return sqlConf;
-			}
-		};
-	}
+    public static final SqlAsyncMapConfiguration fromSqlConfiguration(final SqlConnectionConfiguration sqlConf) {
+        return new SqlAsyncMapConfiguration() {
 
-	public static final void assertTable(SqlConnectionConfiguration sqlConf) {
-		Connection connection = SqlConnectionFactory.createConnection(sqlConf);
+            @Override
+            public SqlConnectionConfiguration sql() {
+                return sqlConf;
+            }
+        };
+    }
 
-		try {
-			CallableStatement statement = connection
-					.prepareCall("CREATE TABLE IF NOT EXISTS "
-							+ sqlConf.getTableName()
-							+ "(ID VARCHAR(512) PRIMARY KEY, VALUE BLOB);");
+    public static final void assertTable(final SqlConnectionConfiguration sqlConf) {
+        final Connection connection = SqlConnectionFactory.createConnection(sqlConf);
 
-			statement.execute();
+        try {
+            final CallableStatement statement = connection.prepareCall("CREATE TABLE IF NOT EXISTS "
+                    + sqlConf.getTableName() + "(ID VARCHAR(512) PRIMARY KEY, VALUE BLOB);");
 
-			/*
-			 * Don't close the connection for H2 in memory databases. Closing
-			 * the connection would wipe the created table.
-			 */
-			if (!sqlConf.getConnectionString().contains(":mem:")) {
-				connection.close();
-			}
+            statement.execute();
 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
+            /*
+             * Don't close the connection for H2 in memory databases. Closing
+             * the connection would wipe the created table.
+             */
+            if (!sqlConf.getConnectionString().contains(":mem:")) {
+                connection.close();
+            }
+
+        } catch (final SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static final <K, V> AsyncMap<K, V> encodeKeysForCaseInsensitiveStorage(final AsyncMap<K, V> map) {
+        AsyncMaps.filterKeys(new EncodeCaseInsensitiveKey(), map);
+    }
 
 }
