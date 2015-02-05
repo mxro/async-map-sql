@@ -7,15 +7,21 @@ public class CaseInsensitiveToCaseSensitiveFilter implements Function<String, St
     @Override
     public String apply(final String input) {
 
-        final String res = "";
+        String res = "";
 
-        for (int i=0;i<input.length();i++) {
+        int i = 0;
+        while (i < input.length()) {
 
             final char testChar = input.charAt(i);
 
             if (testChar != '^') {
-                final res 
+                res += testChar;
+            } else {
+                i++;
+                res += Character.toUpperCase(input.charAt(i));
             }
+
+            i++;
 
         }
 
