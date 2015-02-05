@@ -122,6 +122,7 @@ public class TestThatValuesCanBeWrittenAndRead {
         });
 
         Assert.assertEquals(42, map.getSync("Read_it"));
+        Assert.assertEquals(43, map.getSync("Read_It"));
 
         // AsyncMap<String, Object> map2 =
         // AsyncMapSql.createMap(AsyncMapSql.fromSqlConfiguration(sqlConf),
