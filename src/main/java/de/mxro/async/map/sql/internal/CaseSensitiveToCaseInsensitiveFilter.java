@@ -12,7 +12,7 @@ public class CaseSensitiveToCaseInsensitiveFilter implements Function<String, St
         for (int i = 0; i < input.length(); i++) {
             final char testChar = input.charAt(i);
 
-            if (Character.isLowerCase(testChar)) {
+            if (Character.isLowerCase(testChar) || testChar == '_') {
                 res += testChar;
             } else {
                 res += "^" + testChar;

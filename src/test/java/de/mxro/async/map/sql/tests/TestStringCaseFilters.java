@@ -15,6 +15,8 @@ public class TestStringCaseFilters {
         final CaseInsensitiveToCaseSensitiveFilter filterOut = new CaseInsensitiveToCaseSensitiveFilter();
 
         final String lowerCase = filterIn.apply("Something_with_Uppercase");
+
+        // Assert.assertEquals(expected, actual);
         System.out.println(lowerCase);
 
         System.out.println(filterOut.apply(lowerCase));
