@@ -8,7 +8,7 @@ public class EncodeCaseInsensitiveKey implements Function<String, String> {
     public String apply(final String input) {
 
         String res = "";
-
+        System.out.println("INPUT " + input);
         for (int i = 0; i < input.length(); i++) {
             final char testChar = input.charAt(i);
 
