@@ -1,4 +1,4 @@
-package de.mxro.async.map.sql.internal;
+package de.mxro.async.map.sql.tests;
 
 import de.mxro.fn.Function;
 

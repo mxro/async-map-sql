@@ -4,7 +4,6 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import de.mxro.async.map.sql.internal.DecodeCaseInsensitiveKey;
 import de.mxro.async.map.sql.internal.EncodeCaseInsensitiveKey;
 
 public class TestStringCaseFilters {
@@ -26,7 +25,7 @@ public class TestStringCaseFilters {
 
         Assert.assertEquals("this/is/^Nothing/but_a_very-common_^K^E^Y", key2);
 
-        System.out.println(filterOut.apply(key2));
+        Assert.assertEquals("this/is/Nothing/but_a_very-common_KEY", filterOut.apply(key2));
 
     }
 
