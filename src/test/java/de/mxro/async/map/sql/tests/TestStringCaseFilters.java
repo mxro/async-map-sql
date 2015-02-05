@@ -21,9 +21,8 @@ public class TestStringCaseFilters {
         Assert.assertEquals("^Something_with_^Uppercase", lowerCase);
 
         Assert.assertEquals("Something_with_Uppercase", filterOut.apply(lowerCase));
-        // System.out.println(lowerCase);
 
-        // System.out.println();
+        System.out.println(filterIn.apply("this/is/Nothing/but_a_very-common_key"));
 
     }
 

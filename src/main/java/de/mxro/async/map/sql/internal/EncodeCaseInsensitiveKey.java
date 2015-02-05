@@ -12,7 +12,7 @@ public class EncodeCaseInsensitiveKey implements Function<String, String> {
         for (int i = 0; i < input.length(); i++) {
             final char testChar = input.charAt(i);
 
-            if (Character.isLowerCase(testChar) || testChar == '_') {
+            if (Character.isLowerCase(testChar) || testChar == '_' || testChar == '/' || testChar == '-') {
                 res += testChar;
             } else {
                 res += "^" + testChar;
