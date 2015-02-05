@@ -33,7 +33,7 @@ import de.mxro.serialization.jre.SerializationJre;
 
 public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 
-    private final static boolean ENABLE_DEBUG = false;
+    private final static boolean ENABLE_DEBUG = true;
 
     private final SqlAsyncMapConfiguration conf;
 
