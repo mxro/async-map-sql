@@ -10,11 +10,14 @@ public class TestStringCaseFilters {
     @Test
     public void test() {
 
-        final CaseInsensitiveToCaseSensitiveFilter filterIn = new CaseInsensitiveToCaseSensitiveFilter();
+        final CaseSensitiveToCaseInsensitiveFilter filterIn = new CaseSensitiveToCaseInsensitiveFilter();
 
-        final CaseSensitiveToCaseInsensitiveFilter filterOut = new CaseSensitiveToCaseInsensitiveFilter();
+        final CaseInsensitiveToCaseSensitiveFilter filterOut = new CaseInsensitiveToCaseSensitiveFilter();
 
-        System.out.println(filterIn.apply("Something_with_Uppercase"));
+        final String lowerCase = filterIn.apply("Something_with_Uppercase");
+        System.out.println(lowerCase);
+
+        System.out.println(filterOut.apply(lowerCase));
 
     }
 
