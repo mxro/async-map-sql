@@ -15,7 +15,7 @@ public class CaseSensitiveToCaseInsensitiveFilter implements Function<String, St
             if (Character.isLowerCase(testChar) || testChar == '_') {
                 res += testChar;
             } else {
-                res += "^" + testChar;
+                res += "^" + Character.toLowerCase(testChar);
             }
 
         }

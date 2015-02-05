@@ -18,10 +18,12 @@ public class TestStringCaseFilters {
 
         final String lowerCase = filterIn.apply("Something_with_Uppercase");
 
-        Assert.assertEquals("^Something_with_^Uppercase", lowerCase);
-        System.out.println(lowerCase);
+        Assert.assertEquals("^something_with_^uppercase", lowerCase);
 
-        System.out.println(filterOut.apply(lowerCase));
+        Assert.assertEquals("Something_with_Uppercase", filterOut.apply(lowerCase));
+        // System.out.println(lowerCase);
+
+        // System.out.println();
 
     }
 
