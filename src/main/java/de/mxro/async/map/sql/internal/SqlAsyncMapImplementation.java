@@ -298,12 +298,14 @@ public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
     @Override
     public V getSync(final String key) {
 
-        System.out.println("get " + key);
+        // System.out.println("get " + key);
         final V value = (V) getNode(key);
-        System.out.println("got " + value);
-        if (key.equals("mxrogm/mxrogm/xplr/.n/Manage/.n/Projects/.n/Appjangle_Apps/.n/Maybes/.n/Application_Deployment/Reading_It")) {
-            throw new RuntimeException();
-        }
+        // System.out.println("got " + value);
+        // if
+        // (key.equals("mxrogm/mxrogm/xplr/.n/Manage/.n/Projects/.n/Appjangle_Apps/.n/Maybes/.n/Application_Deployment/Reading_It"))
+        // {
+        // throw new RuntimeException();
+        // }
         return value;
     }
 
