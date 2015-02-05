@@ -22,7 +22,11 @@ public class TestStringCaseFilters {
 
         Assert.assertEquals("Something_with_Uppercase", filterOut.apply(lowerCase));
 
-        System.out.println(filterIn.apply("this/is/Nothing/but_a_very-common_key"));
+        final String key2 = filterIn.apply("this/is/Nothing/but_a_very-common_KEY");
+
+        Assert.assertEquals("this/is/^Nothing/but_a_very-common_^K^E^Y", key2);
+
+        System.out.println(filterOut.apply(key2));
 
     }
 
