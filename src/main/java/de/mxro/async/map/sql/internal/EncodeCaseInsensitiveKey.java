@@ -14,7 +14,7 @@ public class EncodeCaseInsensitiveKey implements Function<String, String> {
 
             assert testChar != '^' : "Found illegal character for Case Sensitive Encoding: ^\n" + "   In Key: " + input;
 
-            if (Character.isLowerCase(testChar) || testChar == '_' || testChar == '/' || testChar == '-') {
+            if (!Character.isUpperCase(testChar) || testChar == '_' || testChar == '/' || testChar == '-') {
                 res += testChar;
             } else {
                 res += "^" + testChar;
