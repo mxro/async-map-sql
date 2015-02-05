@@ -1,5 +1,7 @@
 package de.mxro.async.map.sql.tests;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 import de.mxro.async.map.sql.internal.CaseInsensitiveToCaseSensitiveFilter;
@@ -16,7 +18,7 @@ public class TestStringCaseFilters {
 
         final String lowerCase = filterIn.apply("Something_with_Uppercase");
 
-        // Assert.assertEquals(expected, actual);
+        Assert.assertEquals("^Something_with_^Uppercase", lowerCase);
         System.out.println(lowerCase);
 
         System.out.println(filterOut.apply(lowerCase));
