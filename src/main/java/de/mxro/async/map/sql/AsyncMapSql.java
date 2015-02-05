@@ -68,8 +68,21 @@ public final class AsyncMapSql {
         }
     }
 
-    public static final <K, V> AsyncMap<K, V> encodeKeysForCaseInsensitiveStorage(final AsyncMap<K, V> map) {
-        AsyncMaps.filterKeys(new EncodeCaseInsensitiveKey(), map);
+    /**
+     * <p>
+     * Some databases (such as MySQL) store keys case insensitive by default.
+     * This decorator allows to preserve the semantic information of case
+     * sensitive keys when storing them with a case insensitive storage engine.
+     * <p>
+     * Very useful for URLs as keys.
+     * <p>
+     * Keys are not allowed to contain the character '^'.
+     * 
+     * @param map
+     * @return
+     */
+    public static final <V> AsyncMap<String, V> encodeKeysForCaseInsensitiveStorage(final AsyncMap<String, V> map) {
+        return AsyncMaps.filterKeys(new EncodeCaseInsensitiveKey(), map);
     }
 
 }
