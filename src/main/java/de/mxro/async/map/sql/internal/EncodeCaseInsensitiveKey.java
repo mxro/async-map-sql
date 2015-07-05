@@ -1,5 +1,7 @@
 package de.mxro.async.map.sql.internal;
 
+import delight.functional.Function;
+
 public class EncodeCaseInsensitiveKey implements Function<String, String> {
 
     @Override
