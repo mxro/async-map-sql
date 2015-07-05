@@ -1,5 +1,11 @@
 package de.mxro.async.map.sql.tests;
 
+import delight.async.AsyncCommon;
+import delight.async.Operation;
+import delight.async.callbacks.ValueCallback;
+import delight.async.jre.Async;
+import delight.functional.Success;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,11 +19,6 @@ import de.mxro.serialization.Serializer;
 import de.mxro.serialization.jre.SerializationJre;
 import de.mxro.serialization.jre.StreamDestination;
 import de.mxro.serialization.jre.StreamSource;
-import delight.async.AsyncCommon;
-import delight.async.Operation;
-import delight.async.callbacks.ValueCallback;
-import delight.async.jre.Async;
-import delight.functional.Success;
 
 public class TestThatValuesCanBeWrittenAndRead {
 

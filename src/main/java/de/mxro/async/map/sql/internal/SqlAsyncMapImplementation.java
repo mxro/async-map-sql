@@ -1,5 +1,9 @@
 package de.mxro.async.map.sql.internal;
 
+import delight.async.callbacks.SimpleCallback;
+import delight.async.callbacks.ValueCallback;
+import delight.functional.Fn;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,9 +30,6 @@ import de.mxro.concurrency.schedule.SingleInstanceQueueWorker;
 import de.mxro.concurrency.wrappers.SimpleExecutor;
 import de.mxro.concurrency.wrappers.SimpleExecutor.WhenExecutorShutDown;
 import de.mxro.serialization.jre.SerializationJre;
-import delight.async.callbacks.SimpleCallback;
-import delight.async.callbacks.ValueCallback;
-import delight.functional.Fn;
 import one.utils.jre.OneUtilsJre;
 
 public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
