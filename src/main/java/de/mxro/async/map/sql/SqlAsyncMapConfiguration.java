@@ -1,7 +1,8 @@
 package de.mxro.async.map.sql;
 
+import delight.factories.Configuration;
+
 import de.mxro.async.map.AsyncMap;
-import de.mxro.factories.Configuration;
 
 /**
  * Configuration for a SQL linked {@link AsyncMap}.
