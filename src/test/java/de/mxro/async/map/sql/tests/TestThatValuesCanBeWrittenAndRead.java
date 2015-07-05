@@ -9,7 +9,6 @@ import de.mxro.async.map.AsyncMap;
 import de.mxro.async.map.sql.AsyncMapSql;
 import de.mxro.async.map.sql.SqlAsyncMapDependencies;
 import de.mxro.async.map.sql.SqlConnectionConfiguration;
-import de.mxro.fn.Success;
 import de.mxro.serialization.Serializer;
 import de.mxro.serialization.jre.SerializationJre;
 import de.mxro.serialization.jre.StreamDestination;
@@ -18,6 +17,7 @@ import delight.async.AsyncCommon;
 import delight.async.Operation;
 import delight.async.callbacks.ValueCallback;
 import delight.async.jre.Async;
+import delight.functional.Success;
 
 public class TestThatValuesCanBeWrittenAndRead {
 

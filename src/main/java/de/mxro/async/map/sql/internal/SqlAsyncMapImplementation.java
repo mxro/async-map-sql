@@ -18,7 +18,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import one.utils.jre.OneUtilsJre;
 import de.mxro.async.map.AsyncMap;
 import de.mxro.async.map.operations.MapOperation;
 import de.mxro.async.map.sql.SqlAsyncMapConfiguration;
@@ -26,10 +25,11 @@ import de.mxro.async.map.sql.SqlAsyncMapDependencies;
 import de.mxro.concurrency.schedule.SingleInstanceQueueWorker;
 import de.mxro.concurrency.wrappers.SimpleExecutor;
 import de.mxro.concurrency.wrappers.SimpleExecutor.WhenExecutorShutDown;
-import de.mxro.fn.Fn;
 import de.mxro.serialization.jre.SerializationJre;
 import delight.async.callbacks.SimpleCallback;
 import delight.async.callbacks.ValueCallback;
+import delight.functional.Fn;
+import one.utils.jre.OneUtilsJre;
 
 public class SqlAsyncMapImplementation<V> implements AsyncMap<String, V> {
 

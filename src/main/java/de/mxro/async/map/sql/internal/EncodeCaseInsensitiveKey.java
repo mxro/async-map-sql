@@ -1,7 +1,5 @@
 package de.mxro.async.map.sql.internal;
 
-import de.mxro.fn.Function;
-
 public class EncodeCaseInsensitiveKey implements Function<String, String> {
 
     @Override

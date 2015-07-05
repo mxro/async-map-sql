@@ -1,10 +1,9 @@
 package de.mxro.async.map.sql.tests;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import de.mxro.async.map.sql.internal.EncodeCaseInsensitiveKey;
+import junit.framework.Assert;
 
 public class TestStringCaseFilters {
 
