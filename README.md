@@ -1,3 +1,7 @@
+# MOVED
+
+This project has moved to [javadelight/delight-keyvalue-sql](https://github.com/javadelight/delight-keyvalue-sql).
+
 async-map-sql
 =============
 
